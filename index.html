@@ -3,157 +3,149 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>Sundri's Birthday Journey 💜</title>
+  <title>For Sundri 💜</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <canvas id="world"></canvas>
-  <div class="sky"></div>
-  <div class="mist"></div>
+  <canvas id="scene"></canvas>
+  <div class="aurora"></div>
+  <button id="soundBtn" class="sound-btn">Sound ✦</button>
+  <div class="progress"><span id="progressBar"></span></div>
 
-  <button class="sound-btn" id="soundBtn">Sound ✦</button>
-
-  <main class="game">
-    <section class="scene active intro" data-world="night">
-      <div class="stars-title">Sundri’s Birthday Journey</div>
-      <div class="elephant-guide big" id="introElephant">
-        <span class="elephant">🐘</span>
-        <span class="balloon">💜</span>
-      </div>
-      <h1>Hey Sundri...</h1>
-      <p>The birthday elephant has come to take you through our story.</p>
-      <button class="primary" onclick="openGate()">Ride with me</button>
+  <main id="app">
+    <section class="scene active dark" data-type="intro">
+      <div class="particle-elephant" id="particleElephant">🐘</div>
+      <p class="kicker">For someone who changed my life</p>
+      <h1>Hey Sundri</h1>
+      <p class="hint">Tap anywhere to enter your little universe.</p>
     </section>
 
-    <section class="scene gate-scene" data-world="forest">
-      <div class="journey-top">
-        <span>Gate 1</span>
-        <strong>Before “Us”</strong>
+    <section class="scene light" data-type="memory">
+      <p class="kicker">Loading memories...</p>
+      <h2>Found 5 months of magic.</h2>
+      <div class="memory-stats">
+        <span>178 smiles</span>
+        <span>42 adventures</span>
+        <span>1 beautiful wife</span>
       </div>
-      <div class="gate" id="gate1">
-        <div class="gate-door left"></div>
-        <div class="gate-door right"></div>
-        <div class="gate-arch">🌸</div>
-      </div>
-      <div class="elephant-guide"><span class="elephant">🐘</span></div>
-      <p class="gate-text">Tap the glowing heart to open the first gate.</p>
-      <button class="heart-key" onclick="enterMemory(1)">💜</button>
+      <p class="hint">Tap to continue</p>
     </section>
 
-    <section class="scene memory-scene" data-world="forest">
-      <p class="chapter-pill">Before I met you</p>
-      <h2>Life was just life. Then one day, you happened.</h2>
-      <div class="memory-carousel" data-carousel>
-        <article class="memory-card active"><img src="assets/images/before-car.jpg"><p>Back when we were still slowly becoming us.</p></article>
-        <article class="memory-card"><img src="assets/images/before-temple-selfie.jpg"><p>Our first blessings together.</p></article>
-        <article class="memory-card"><img src="assets/images/before-temple-portrait.jpg"><p>You already looked like home.</p></article>
-      </div>
-      <div class="footprints" onclick="openGate()">🐾 🐾 🐾 Continue</div>
+    <section class="scene dark" data-type="text">
+      <div class="typewriter" id="typedStory"></div>
+      <p class="hint">Tap after reading</p>
     </section>
 
-    <section class="scene gate-scene" data-world="temple">
-      <div class="journey-top">
-        <span>Gate 2</span>
-        <strong>February 5</strong>
-      </div>
-      <div class="gate golden" id="gate2">
-        <div class="gate-door left"></div>
-        <div class="gate-door right"></div>
-        <div class="gate-arch">💍</div>
-      </div>
-      <div class="elephant-guide"><span class="elephant">🐘</span><span class="flower">🌸</span></div>
-      <p class="gate-text">This gate holds the day everything changed.</p>
-      <button class="heart-key" onclick="enterMemory(2)">💜</button>
-    </section>
-
-    <section class="scene wedding-scene" data-world="temple">
-      <p class="chapter-pill">The day I stopped saying “I”</p>
-      <h2>and started saying “We”.</h2>
-      <div class="wedding-stack" data-carousel>
-        <article class="memory-card active"><img src="assets/images/wedding-mangalsutra.jpg"><p>The day I got to call you my wife.</p></article>
-        <article class="memory-card"><img src="assets/images/wedding-akshata.jpg"><p>My favorite person became my family.</p></article>
-      </div>
-      <div class="footprints" onclick="openGate()">🐾 🐾 🐾 Continue</div>
-    </section>
-
-    <section class="scene gate-scene" data-world="sunrise">
-      <div class="journey-top">
-        <span>Gate 3</span>
-        <strong>Five Months Later</strong>
-      </div>
-      <div class="gate purple" id="gate3">
-        <div class="gate-door left"></div>
-        <div class="gate-door right"></div>
-        <div class="gate-arch">✨</div>
-      </div>
-      <div class="elephant-guide"><span class="elephant">🐘</span></div>
-      <p class="gate-text">Small fights, big laughs, and a life becoming ours.</p>
-      <button class="heart-key" onclick="enterMemory(3)">💜</button>
-    </section>
-
-    <section class="scene memory-scene" data-world="sunrise">
-      <p class="chapter-pill">Five months of us</p>
-      <h2>Our everyday magic.</h2>
-      <div class="memory-carousel" data-carousel>
-        <article class="memory-card active"><img src="assets/images/mountain.jpg"><p>Partners in every climb, every laugh, every adventure.</p></article>
-        <article class="memory-card"><img src="assets/images/boxing.jpg"><p>Beautiful... but also dangerous. 😂</p></article>
-        <article class="memory-card"><img src="assets/images/holi.jpg"><p>Life has been far more colorful since you came into it.</p></article>
-        <article class="memory-card"><img src="assets/images/leo.jpg"><p>Winning Leo’s approval was the real achievement. 🐾</p></article>
-      </div>
-      <div class="footprints" onclick="openGate()">🐾 🐾 🐾 Continue</div>
-    </section>
-
-    <section class="scene gate-scene" data-world="ocean">
-      <div class="journey-top">
-        <span>Gate 4</span>
-        <strong>Adventures</strong>
-      </div>
-      <div class="gate ocean-gate" id="gate4">
-        <div class="gate-door left"></div>
-        <div class="gate-door right"></div>
-        <div class="gate-arch">🌊</div>
-      </div>
-      <div class="elephant-guide"><span class="elephant">🐘</span><span class="balloon small">💜</span></div>
-      <p class="gate-text">Every place became special because you were there.</p>
-      <button class="heart-key" onclick="enterMemory(4)">💜</button>
-    </section>
-
-    <section class="scene memory-scene ocean-memory" data-world="ocean">
-      <p class="chapter-pill">Our little adventures</p>
-      <h2>Wherever you are, that place becomes home.</h2>
-      <div class="memory-carousel" data-carousel>
-        <article class="memory-card active"><img src="assets/images/boracay.jpg"><p>The sunset was beautiful. But I kept looking at you.</p></article>
-        <article class="memory-card"><img src="assets/images/date.jpg"><p>Every date with you becomes my favorite memory.</p></article>
-        <article class="memory-card"><img src="assets/images/flight-sleep.jpg"><p>Even on a crowded flight, my favorite place was wherever you were.</p></article>
-        <article class="memory-card"><img src="assets/images/selfie.jpg"><p>One selfie... thousands more to come.</p></article>
-      </div>
-      <div class="footprints" onclick="openGate()">🐾 🐾 🐾 Final Gate</div>
-    </section>
-
-    <section class="scene final-gate-scene" data-world="night">
-      <div class="journey-top">
-        <span>Final Gate</span>
-        <strong>Happy Birthday</strong>
-      </div>
-      <div class="cloud-gate">
-        <div class="moon">🌙</div>
-        <div class="elephant-guide cloud-ele"><span class="elephant">🐘</span></div>
-        <button class="heart-key final-key" onclick="enterMemory(5)">Open final wish 💜</button>
+    <section class="scene cinematic light" data-type="photo" data-photo="before-car.jpg">
+      <div class="floating-photo"><img src="assets/images/before-car.jpg" /></div>
+      <div class="caption">
+        <p class="kicker">Before “Us”</p>
+        <h2>Back when we were still slowly becoming us.</h2>
       </div>
     </section>
 
-    <section class="scene cake-scene" data-world="night">
-      <p class="chapter-pill">Make a wish</p>
+    <section class="scene cinematic light" data-type="photo" data-photo="before-temple-selfie.jpg">
+      <div class="floating-photo"><img src="assets/images/before-temple-selfie.jpg" /></div>
+      <div class="caption">
+        <p class="kicker">First blessings</p>
+        <h2>Every blessing felt like a step closer to forever.</h2>
+      </div>
+    </section>
+
+    <section class="scene cinematic light" data-type="photo" data-photo="before-temple-portrait.jpg">
+      <div class="floating-photo"><img src="assets/images/before-temple-portrait.jpg" /></div>
+      <div class="caption">
+        <p class="kicker">One beautiful beginning</p>
+        <h2>You already looked like home.</h2>
+      </div>
+    </section>
+
+    <section class="scene cinematic wedding" data-type="wedding" data-photo="wedding-mangalsutra.jpg">
+      <div class="floating-photo hero"><img src="assets/images/wedding-mangalsutra.jpg" /></div>
+      <div class="caption">
+        <p class="kicker">February 5</p>
+        <h2>The day I stopped saying “I” and started saying “We”.</h2>
+      </div>
+    </section>
+
+    <section class="scene cinematic wedding" data-type="wedding" data-photo="wedding-akshata.jpg">
+      <div class="floating-photo hero"><img src="assets/images/wedding-akshata.jpg" /></div>
+      <div class="caption">
+        <p class="kicker">The best decision</p>
+        <h2>My favorite person became my family.</h2>
+      </div>
+    </section>
+
+    <section class="scene cinematic light" data-type="photo" data-photo="mountain.jpg">
+      <div class="floating-photo"><img src="assets/images/mountain.jpg" /></div>
+      <div class="caption">
+        <p class="kicker">Five months later</p>
+        <h2>Partners in every climb, every laugh, every adventure.</h2>
+      </div>
+    </section>
+
+    <section class="scene cinematic light punch" data-type="photo" data-photo="boxing.jpg">
+      <div class="floating-photo"><img src="assets/images/boxing.jpg" /></div>
+      <div class="caption">
+        <p class="kicker">Warning</p>
+        <h2>Beautiful... but also dangerous. 😂</h2>
+      </div>
+    </section>
+
+    <section class="scene cinematic holi" data-type="holi" data-photo="holi.jpg">
+      <div class="floating-photo"><img src="assets/images/holi.jpg" /></div>
+      <div class="caption">
+        <p class="kicker">The real us</p>
+        <h2>Life has been far more colorful since you came into it.</h2>
+      </div>
+    </section>
+
+    <section class="scene cinematic light" data-type="leo" data-photo="leo.jpg">
+      <div class="paw-trail">🐾 🐾 🐾</div>
+      <div class="floating-photo"><img src="assets/images/leo.jpg" /></div>
+      <div class="caption">
+        <p class="kicker">Leo approved</p>
+        <h2>Winning your heart was special. Winning Leo’s approval was the real achievement.</h2>
+      </div>
+    </section>
+
+    <section class="scene cinematic ocean" data-type="ocean" data-photo="boracay.jpg">
+      <div class="waves"></div>
+      <div class="floating-photo hero"><img src="assets/images/boracay.jpg" /></div>
+      <div class="caption">
+        <p class="kicker">Our little adventures</p>
+        <h2>The sunset was beautiful. But I kept looking at you.</h2>
+      </div>
+    </section>
+
+    <section class="scene cinematic light" data-type="photo" data-photo="date.jpg">
+      <div class="floating-photo"><img src="assets/images/date.jpg" /></div>
+      <div class="caption">
+        <p class="kicker">Date memories</p>
+        <h2>Every date with you becomes my favorite memory.</h2>
+      </div>
+    </section>
+
+    <section class="scene cinematic light" data-type="photo" data-photo="flight-sleep.jpg">
+      <div class="floating-photo"><img src="assets/images/flight-sleep.jpg" /></div>
+      <div class="caption">
+        <p class="kicker">Wherever you are</p>
+        <h2>Even on a crowded flight, my favorite place was wherever you were.</h2>
+      </div>
+    </section>
+
+    <section class="scene cake-scene light" data-type="cake">
+      <p class="kicker">Make a wish</p>
       <h2>Happy Birthday, Sundri 💜</h2>
-      <p>Tap the candle to blow it out.</p>
-      <div class="cake" id="cake" onclick="blowCandle()">
+      <p>Tap the candle.</p>
+      <div class="cake" id="cake">
         <div class="flame"></div><div class="candle"></div><div class="cake-top"></div><div class="cake-base">Sundri</div><div class="plate"></div>
       </div>
     </section>
 
-    <section class="scene letter-scene" data-world="night">
-      <div class="final-heart">💜</div>
-      <div class="letter">
+    <section class="scene final dark" data-type="final">
+      <div class="heart-cloud">💜</div>
+      <div class="final-letter">
         <h2>Happy Birthday, Sundri</h2>
         <p>Five months ago, on February 5, you became my wife.</p>
         <p>Since then, you have turned ordinary days into beautiful memories.</p>
@@ -161,20 +153,30 @@
         <p>I can’t promise life will always be easy. But I promise you will never walk through it alone.</p>
         <h3>I love you. Forever your annoying husband, Varun ❤️</h3>
       </div>
-      <button class="primary" onclick="nextScene()">One more thing...</button>
+      <p class="hint">Tap for one last thing</p>
     </section>
 
-    <section class="scene secret-scene" data-world="night">
-      <div class="elephant-guide big"><span class="elephant">🐘</span><span class="balloon">💜</span></div>
+    <section class="scene secret dark" data-type="secret">
+      <div class="particle-elephant">🐘💜</div>
       <h2>Wait...</h2>
       <p>Don’t close this yet.</p>
       <div class="secret-note">
         <p>Your birthday is not over.</p>
         <p>Now go find your real surprise. 🎁</p>
       </div>
-      <button class="primary" onclick="restart()">Replay journey</button>
+      <button class="restart" onclick="restartExperience(event)">Replay</button>
     </section>
   </main>
+
+  <div id="skipNote" class="skip-note">
+    <div>
+      <h2>Nice try, Sundri 😄</h2>
+      <p>You already waited for me. Now wait just a little longer. 💜</p>
+      <button onclick="closeSkip(event)">Continue</button>
+    </div>
+  </div>
+
+  <button class="skip-fixed" onclick="openSkip(event)">I’m impatient 😏</button>
 
   <script src="script.js"></script>
 </body>

@@ -1,3 +1,3 @@
-# Version X - Sundri Birthday Elephant Journey
+# For Sundri V6 Cinematic
 
-Game-like elephant gate journey. Upload files to GitHub root.
+Full-screen cinematic VFX version. Replace GitHub root files with these.
