@@ -1,85 +1,64 @@
 const scenes=[...document.querySelectorAll(".scene")];
-const aurora=document.querySelector(".aurora");
-const progress=document.getElementById("progressBar");
+const bg=document.getElementById("worldBg");
+const progress=document.getElementById("progress");
 let current=0;
-let typed=false;
 
-function updateScene(){
+function setScene(index){
   scenes.forEach(s=>s.classList.remove("active"));
-  const active=scenes[current];
-  active.classList.add("active");
-  aurora.className="aurora";
-  const type=active.dataset.type;
-  if(active.classList.contains("light")) aurora.classList.add("light");
-  if(type==="ocean") aurora.classList.add("ocean");
-  if(type==="holi") aurora.classList.add("holi");
-  progress.style.width=(current/(scenes.length-1))*100+"%";
-  if(type==="wedding") petals(24);
-  if(type==="text") typeStory();
-  if(type==="final") heartBurst();
+  const scene=scenes[index];
+  scene.classList.add("active");
+  bg.className="";
+  bg.classList.add(scene.dataset.bg || "night");
+  progress.style.width=(index/(scenes.length-1))*100+"%";
+
+  gsap.fromTo(scene.querySelectorAll(".copy, .photo-world, .elephant-guide, .letter, .cake, .heart-constellation"), 
+    {y:35, opacity:0, scale:.96},
+    {y:0, opacity:1, scale:1, duration:.9, stagger:.08, ease:"power3.out"}
+  );
+
+  if(scene.classList.contains("wedding")) petals(28);
+  if(scene.classList.contains("punch")) punch();
+  if(scene.classList.contains("holi")) colorBurst();
+  if(scene.classList.contains("final")) heartBurst();
 }
 
-function nextScene(){
+function next(){
   if(current < scenes.length-1){
     current++;
-    updateScene();
-    burstSparks(innerWidth/2, innerHeight/2, 18);
+    setScene(current);
+    burstSparks(innerWidth/2, innerHeight/2, 20);
   }
 }
 
-document.getElementById("app").addEventListener("click",(e)=>{
+document.getElementById("story").addEventListener("click",(e)=>{
   if(e.target.closest("button") || e.target.closest("#cake")) return;
-  nextScene();
+  next();
 });
 
-function restartExperience(e){
+function restartStory(e){
   e.stopPropagation();
   current=0;
   document.getElementById("cake").classList.remove("blown");
-  updateScene();
+  setScene(0);
 }
 
-function typeStory(){
-  if(typed) return;
-  typed=true;
-  const text=`Hey Sundri...
-
-Happy Birthday ❤️
-
-I wanted to buy you something.
-
-Then I realized...
-
-The best gift is remembering everything that made us... us.`;
-  const el=document.getElementById("typedStory");
-  let i=0;
-  function type(){
-    if(i<=text.length){
-      el.textContent=text.slice(0,i);
-      i++;
-      setTimeout(type,42);
-    }
-  }
-  type();
+function openSkip(e){
+  e.stopPropagation();
+  document.getElementById("modal").classList.add("active");
+  burstSparks(innerWidth/2, innerHeight/2, 20);
+}
+function closeSkip(e){
+  e.stopPropagation();
+  document.getElementById("modal").classList.remove("active");
 }
 
 document.getElementById("cake").addEventListener("click",(e)=>{
   e.stopPropagation();
   document.getElementById("cake").classList.add("blown");
+  burst(170);
   navigator.vibrate && navigator.vibrate([60,40,80]);
-  burst(160);
-  setTimeout(nextScene,1200);
+  setTimeout(next,1200);
 });
-
-function openSkip(e){
-  e.stopPropagation();
-  document.getElementById("skipNote").classList.add("active");
-  burstSparks(innerWidth/2, innerHeight/2, 18);
-}
-function closeSkip(e){
-  e.stopPropagation();
-  document.getElementById("skipNote").classList.remove("active");
-}
 
 document.addEventListener("pointerdown",(e)=>{
   if(e.target.closest("button")) return;
@@ -99,6 +78,15 @@ function burstSparks(x,y,count){
     document.body.appendChild(s);
     setTimeout(()=>s.remove(),800);
   }
+}
+
+function punch(){
+  gsap.fromTo(".impact",{scale:.2,opacity:0,rotation:-20},{scale:1.4,opacity:.7,rotation:10,duration:.25,yoyo:true,repeat:1});
+  navigator.vibrate && navigator.vibrate(70);
+}
+
+function colorBurst(){
+  burstSparks(innerWidth/2,innerHeight/2,45);
 }
 
 function burst(count){
@@ -133,7 +121,7 @@ function petals(count){
 }
 
 function heartBurst(){
-  for(let i=0;i<48;i++){
+  for(let i=0;i<55;i++){
     setTimeout(()=>{
       const h=document.createElement("div");
       h.className="petal";
@@ -147,8 +135,8 @@ function heartBurst(){
   }
 }
 
-/* Canvas star + cursor trail */
-const canvas=document.getElementById("scene");
+/* Canvas VFX */
+const canvas=document.getElementById("fx");
 const ctx=canvas.getContext("2d");
 let w,h,stars=[],trails=[];
 function resize(){
@@ -160,19 +148,13 @@ function resize(){
 addEventListener("resize",resize);
 resize();
 
-for(let i=0;i<160;i++){
-  stars.push({
-    x:Math.random()*w,
-    y:Math.random()*h,
-    z:.25+Math.random()*1.2,
-    r:(.6+Math.random()*1.8)*devicePixelRatio,
-    a:.2+Math.random()*.55
-  });
+for(let i=0;i<180;i++){
+  stars.push({x:Math.random()*w,y:Math.random()*h,z:.25+Math.random()*1.2,r:(.6+Math.random()*1.8)*devicePixelRatio,a:.18+Math.random()*.55});
 }
 
 document.addEventListener("pointermove",(e)=>{
   trails.push({x:e.clientX*devicePixelRatio,y:e.clientY*devicePixelRatio,life:1});
-  if(trails.length>40) trails.shift();
+  if(trails.length>44) trails.shift();
 });
 
 function draw(){
@@ -180,28 +162,25 @@ function draw(){
   stars.forEach(s=>{
     s.y += s.z*.18*devicePixelRatio;
     s.x += Math.sin(Date.now()*0.0005+s.y)*.08*devicePixelRatio;
-    if(s.y>h) {s.y=0;s.x=Math.random()*w}
+    if(s.y>h){s.y=0;s.x=Math.random()*w}
     ctx.beginPath();
     ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
     ctx.fillStyle=`rgba(199,167,255,${s.a})`;
     ctx.fill();
   });
-
-  trails.forEach((t,i)=>{
+  trails.forEach(t=>{
     t.life-=.035;
-    if(t.life<0)t.life=0;
     ctx.beginPath();
     ctx.arc(t.x,t.y,18*devicePixelRatio*t.life,0,Math.PI*2);
-    ctx.fillStyle=`rgba(216,195,255,${.12*t.life})`;
+    ctx.fillStyle=`rgba(216,195,255,${.14*t.life})`;
     ctx.fill();
   });
   trails=trails.filter(t=>t.life>0);
-
   requestAnimationFrame(draw);
 }
 draw();
 
-/* simple generated soft sound */
+/* Sound */
 let audioCtx,timer,playing=false;
 document.getElementById("soundBtn").addEventListener("click",(e)=>{
   e.stopPropagation();
@@ -237,4 +216,5 @@ function stopSound(){
   if(audioCtx) audioCtx.close();
   document.getElementById("soundBtn").textContent="Sound ✦";
 }
-updateScene();
+
+setScene(0);

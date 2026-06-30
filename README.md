@@ -1,3 +1,3 @@
-# For Sundri V6 Cinematic
+# For Sundri Version X
 
-Full-screen cinematic VFX version. Replace GitHub root files with these.
+GSAP cinematic tap-through story. Replace GitHub root files.

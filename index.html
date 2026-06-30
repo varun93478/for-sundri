@@ -7,145 +7,182 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <canvas id="scene"></canvas>
-  <div class="aurora"></div>
-  <button id="soundBtn" class="sound-btn">Sound ✦</button>
-  <div class="progress"><span id="progressBar"></span></div>
+  <canvas id="fx"></canvas>
+  <div id="worldBg"></div>
+  <div class="grain"></div>
 
-  <main id="app">
-    <section class="scene active dark" data-type="intro">
-      <div class="particle-elephant" id="particleElephant">🐘</div>
-      <p class="kicker">For someone who changed my life</p>
-      <h1>Hey Sundri</h1>
-      <p class="hint">Tap anywhere to enter your little universe.</p>
-    </section>
+  <button id="soundBtn" class="sound">Sound ✦</button>
+  <div class="progress"><span id="progress"></span></div>
 
-    <section class="scene light" data-type="memory">
-      <p class="kicker">Loading memories...</p>
-      <h2>Found 5 months of magic.</h2>
-      <div class="memory-stats">
-        <span>178 smiles</span>
-        <span>42 adventures</span>
-        <span>1 beautiful wife</span>
+  <main id="story">
+    <section class="scene active night" data-bg="night">
+      <div class="elephant-guide">🐘</div>
+      <div class="copy">
+        <p class="tiny">tap tap tap...</p>
+        <h1>Come with me.</h1>
+        <p>I want to show you someone very special.</p>
       </div>
-      <p class="hint">Tap to continue</p>
+      <p class="tap">Tap anywhere</p>
     </section>
 
-    <section class="scene dark" data-type="text">
-      <div class="typewriter" id="typedStory"></div>
-      <p class="hint">Tap after reading</p>
+    <section class="scene night" data-bg="night">
+      <div class="copy center">
+        <p class="tiny">For Sundri</p>
+        <h1>Happy Birthday 💜</h1>
+        <p>This is not a website. This is a small walk through our story.</p>
+      </div>
+      <p class="tap">Tap to walk in</p>
     </section>
 
-    <section class="scene cinematic light" data-type="photo" data-photo="before-car.jpg">
-      <div class="floating-photo"><img src="assets/images/before-car.jpg" /></div>
-      <div class="caption">
-        <p class="kicker">Before “Us”</p>
-        <h2>Back when we were still slowly becoming us.</h2>
+    <section class="scene warm" data-bg="warm">
+      <div class="photo-world">
+        <img src="assets/images/before-car.jpg" />
+      </div>
+      <div class="copy bottom">
+        <p class="tiny">Before “Us”</p>
+        <h2>We were strangers...</h2>
+        <p>slowly becoming home.</p>
       </div>
     </section>
 
-    <section class="scene cinematic light" data-type="photo" data-photo="before-temple-selfie.jpg">
-      <div class="floating-photo"><img src="assets/images/before-temple-selfie.jpg" /></div>
-      <div class="caption">
-        <p class="kicker">First blessings</p>
+    <section class="scene warm" data-bg="warm">
+      <div class="photo-world tilt-right">
+        <img src="assets/images/before-temple-selfie.jpg" />
+      </div>
+      <div class="copy bottom">
+        <p class="tiny">First blessings</p>
         <h2>Every blessing felt like a step closer to forever.</h2>
       </div>
     </section>
 
-    <section class="scene cinematic light" data-type="photo" data-photo="before-temple-portrait.jpg">
-      <div class="floating-photo"><img src="assets/images/before-temple-portrait.jpg" /></div>
-      <div class="caption">
-        <p class="kicker">One beautiful beginning</p>
+    <section class="scene warm" data-bg="warm">
+      <div class="photo-world">
+        <img src="assets/images/before-temple-portrait.jpg" />
+      </div>
+      <div class="copy bottom">
+        <p class="tiny">The beginning</p>
         <h2>You already looked like home.</h2>
       </div>
     </section>
 
-    <section class="scene cinematic wedding" data-type="wedding" data-photo="wedding-mangalsutra.jpg">
-      <div class="floating-photo hero"><img src="assets/images/wedding-mangalsutra.jpg" /></div>
-      <div class="caption">
-        <p class="kicker">February 5</p>
-        <h2>The day I stopped saying “I” and started saying “We”.</h2>
+    <section class="scene wedding" data-bg="gold">
+      <div class="petal-field"></div>
+      <div class="photo-world hero">
+        <img src="assets/images/wedding-mangalsutra.jpg" />
+      </div>
+      <div class="copy bottom">
+        <p class="tiny">February 5</p>
+        <h2>The day I stopped saying “I”...</h2>
+        <p>and started saying “We”.</p>
       </div>
     </section>
 
-    <section class="scene cinematic wedding" data-type="wedding" data-photo="wedding-akshata.jpg">
-      <div class="floating-photo hero"><img src="assets/images/wedding-akshata.jpg" /></div>
-      <div class="caption">
-        <p class="kicker">The best decision</p>
+    <section class="scene wedding" data-bg="gold">
+      <div class="photo-world hero tilt-left">
+        <img src="assets/images/wedding-akshata.jpg" />
+      </div>
+      <div class="copy bottom">
+        <p class="tiny">My favorite memory</p>
         <h2>My favorite person became my family.</h2>
       </div>
     </section>
 
-    <section class="scene cinematic light" data-type="photo" data-photo="mountain.jpg">
-      <div class="floating-photo"><img src="assets/images/mountain.jpg" /></div>
-      <div class="caption">
-        <p class="kicker">Five months later</p>
+    <section class="scene warm" data-bg="lavender">
+      <div class="photo-world">
+        <img src="assets/images/mountain.jpg" />
+      </div>
+      <div class="copy bottom">
+        <p class="tiny">Five months later</p>
         <h2>Partners in every climb, every laugh, every adventure.</h2>
       </div>
     </section>
 
-    <section class="scene cinematic light punch" data-type="photo" data-photo="boxing.jpg">
-      <div class="floating-photo"><img src="assets/images/boxing.jpg" /></div>
-      <div class="caption">
-        <p class="kicker">Warning</p>
-        <h2>Beautiful... but also dangerous. 😂</h2>
+    <section class="scene punch" data-bg="lavender">
+      <div class="impact">💥</div>
+      <div class="photo-world tilt-right">
+        <img src="assets/images/boxing.jpg" />
+      </div>
+      <div class="copy bottom">
+        <p class="tiny">Warning</p>
+        <h2>Beautiful...</h2>
+        <p>but also dangerous. 😂</p>
       </div>
     </section>
 
-    <section class="scene cinematic holi" data-type="holi" data-photo="holi.jpg">
-      <div class="floating-photo"><img src="assets/images/holi.jpg" /></div>
-      <div class="caption">
-        <p class="kicker">The real us</p>
+    <section class="scene holi" data-bg="holi">
+      <div class="color-burst">💜 🌸 💛</div>
+      <div class="photo-world">
+        <img src="assets/images/holi.jpg" />
+      </div>
+      <div class="copy bottom">
+        <p class="tiny">The real us</p>
         <h2>Life has been far more colorful since you came into it.</h2>
       </div>
     </section>
 
-    <section class="scene cinematic light" data-type="leo" data-photo="leo.jpg">
-      <div class="paw-trail">🐾 🐾 🐾</div>
-      <div class="floating-photo"><img src="assets/images/leo.jpg" /></div>
-      <div class="caption">
-        <p class="kicker">Leo approved</p>
-        <h2>Winning your heart was special. Winning Leo’s approval was the real achievement.</h2>
+    <section class="scene warm" data-bg="warm">
+      <div class="paw-path">🐾 🐾 🐾</div>
+      <div class="photo-world tilt-left">
+        <img src="assets/images/leo.jpg" />
+      </div>
+      <div class="copy bottom">
+        <p class="tiny">Leo approved</p>
+        <h2>Winning your heart was special.</h2>
+        <p>Winning Leo’s approval was the real achievement.</p>
       </div>
     </section>
 
-    <section class="scene cinematic ocean" data-type="ocean" data-photo="boracay.jpg">
+    <section class="scene ocean" data-bg="ocean">
       <div class="waves"></div>
-      <div class="floating-photo hero"><img src="assets/images/boracay.jpg" /></div>
-      <div class="caption">
-        <p class="kicker">Our little adventures</p>
-        <h2>The sunset was beautiful. But I kept looking at you.</h2>
+      <div class="photo-world hero">
+        <img src="assets/images/boracay.jpg" />
+      </div>
+      <div class="copy bottom">
+        <p class="tiny">Our little adventures</p>
+        <h2>The sunset was beautiful.</h2>
+        <p>But I kept looking at you.</p>
       </div>
     </section>
 
-    <section class="scene cinematic light" data-type="photo" data-photo="date.jpg">
-      <div class="floating-photo"><img src="assets/images/date.jpg" /></div>
-      <div class="caption">
-        <p class="kicker">Date memories</p>
+    <section class="scene warm" data-bg="warm">
+      <div class="photo-world">
+        <img src="assets/images/date.jpg" />
+      </div>
+      <div class="copy bottom">
+        <p class="tiny">Date memories</p>
         <h2>Every date with you becomes my favorite memory.</h2>
       </div>
     </section>
 
-    <section class="scene cinematic light" data-type="photo" data-photo="flight-sleep.jpg">
-      <div class="floating-photo"><img src="assets/images/flight-sleep.jpg" /></div>
-      <div class="caption">
-        <p class="kicker">Wherever you are</p>
-        <h2>Even on a crowded flight, my favorite place was wherever you were.</h2>
+    <section class="scene warm" data-bg="lavender">
+      <div class="photo-world tilt-right">
+        <img src="assets/images/flight-sleep.jpg" />
+      </div>
+      <div class="copy bottom">
+        <p class="tiny">Wherever you are</p>
+        <h2>Even on a crowded flight...</h2>
+        <p>my favorite place was wherever you were.</p>
       </div>
     </section>
 
-    <section class="scene cake-scene light" data-type="cake">
-      <p class="kicker">Make a wish</p>
-      <h2>Happy Birthday, Sundri 💜</h2>
-      <p>Tap the candle.</p>
+    <section class="scene cake-scene" data-bg="lavender">
+      <div class="copy center">
+        <p class="tiny">Make a wish</p>
+        <h1>Happy Birthday, Sundri 💜</h1>
+        <p>Tap the candle.</p>
+      </div>
       <div class="cake" id="cake">
-        <div class="flame"></div><div class="candle"></div><div class="cake-top"></div><div class="cake-base">Sundri</div><div class="plate"></div>
+        <div class="flame"></div>
+        <div class="candle"></div>
+        <div class="cake-top"></div>
+        <div class="cake-base">Sundri</div>
+        <div class="plate"></div>
       </div>
     </section>
 
-    <section class="scene final dark" data-type="final">
-      <div class="heart-cloud">💜</div>
-      <div class="final-letter">
+    <section class="scene final night" data-bg="night">
+      <div class="heart-constellation">💜</div>
+      <div class="letter">
         <h2>Happy Birthday, Sundri</h2>
         <p>Five months ago, on February 5, you became my wife.</p>
         <p>Since then, you have turned ordinary days into beautiful memories.</p>
@@ -153,22 +190,22 @@
         <p>I can’t promise life will always be easy. But I promise you will never walk through it alone.</p>
         <h3>I love you. Forever your annoying husband, Varun ❤️</h3>
       </div>
-      <p class="hint">Tap for one last thing</p>
     </section>
 
-    <section class="scene secret dark" data-type="secret">
-      <div class="particle-elephant">🐘💜</div>
-      <h2>Wait...</h2>
-      <p>Don’t close this yet.</p>
-      <div class="secret-note">
+    <section class="scene secret night" data-bg="night">
+      <div class="elephant-guide big">🐘💜</div>
+      <div class="copy center">
+        <h1>Wait...</h1>
         <p>Your birthday is not over.</p>
         <p>Now go find your real surprise. 🎁</p>
       </div>
-      <button class="restart" onclick="restartExperience(event)">Replay</button>
+      <button class="replay" onclick="restartStory(event)">Replay</button>
     </section>
   </main>
 
-  <div id="skipNote" class="skip-note">
+  <button class="skip" onclick="openSkip(event)">I’m impatient 😏</button>
+
+  <div class="modal" id="modal">
     <div>
       <h2>Nice try, Sundri 😄</h2>
       <p>You already waited for me. Now wait just a little longer. 💜</p>
@@ -176,8 +213,7 @@
     </div>
   </div>
 
-  <button class="skip-fixed" onclick="openSkip(event)">I’m impatient 😏</button>
-
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
