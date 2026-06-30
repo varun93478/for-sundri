@@ -1,3 +1,3 @@
-# For Sundri V4 Elephant Theme 💜
+# For Sundri V5 VFX 💜
 
-Upload files to GitHub root. Vercel auto-deploys.
+More interaction, VFX, swipe, progress, sparks, petals, elephant theme.

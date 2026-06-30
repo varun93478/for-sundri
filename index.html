@@ -7,35 +7,41 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <canvas id="magicCanvas"></canvas>
-  <div class="paper"></div>
+  <canvas id="fxCanvas"></canvas>
+  <div class="bg-orbs"></div>
+  <div class="vignette"></div>
 
   <button class="sound-btn" id="soundBtn">Sound ✦</button>
+  <div class="progress" id="progress"></div>
 
   <main class="app">
-    <section class="screen active landing">
-      <div class="elephant big-elephant">🐘</div>
-      <p class="mini">A tiny birthday world</p>
-      <h1>Hey Sundri 💜</h1>
-      <p>Something special is waiting for you...</p>
-      <button class="primary" onclick="next()">Tap to open</button>
-    </section>
-
-    <section class="screen loading">
-      <div class="elephant small-elephant">🐘</div>
-      <h2>Loading memories...</h2>
-      <div class="loader"><span></span></div>
-      <div class="found-list">
-        <p>💜 178 smiles</p>
-        <p>💜 42 adventures</p>
-        <p>💜 5 months together</p>
-        <p>💜 1 beautiful wife</p>
+    <section class="screen active landing" data-scene="dark">
+      <div class="elephant-walk">
+        <span class="ele">🐘</span>
+        <span class="balloon">💜</span>
+        <span class="gift">🎁</span>
       </div>
-      <button class="primary show-late" onclick="next()">Begin</button>
+      <p class="mini">A small world made only for you</p>
+      <h1>Hey Sundri</h1>
+      <p class="sub">Tap the gift to open your birthday story.</p>
+      <button class="primary pulse" onclick="next()">Open gift</button>
     </section>
 
-    <section class="screen note">
-      <div class="letter-paper">
+    <section class="screen scanner" data-scene="light">
+      <p class="mini">Memory scanner</p>
+      <h2>Finding pieces of us...</h2>
+      <div class="scan-box">
+        <div class="scan-line"></div>
+        <p>178 smiles</p>
+        <p>42 adventures</p>
+        <p>5 months together</p>
+        <p>1 beautiful wife</p>
+      </div>
+      <button class="primary show-late" onclick="next()">Start story</button>
+    </section>
+
+    <section class="screen note" data-scene="light">
+      <div class="paper-note">
         <p class="hand">Hey Sundri...</p>
         <p>Happy Birthday ❤️</p>
         <p>I wanted to buy you something.</p>
@@ -46,116 +52,80 @@
       <button class="soft-btn" onclick="fakeSkip()">I’m impatient 😏</button>
     </section>
 
-    <section class="screen memory">
+    <section class="screen memory" data-scene="light">
       <p class="tag">Before I met you</p>
       <h2>Life was just life. Then one day, you happened.</h2>
       <div class="carousel" data-carousel>
-        <article class="photo-card active">
-          <img src="assets/images/before-car.jpg" />
-          <p>Back when we were still slowly becoming us.</p>
-        </article>
-        <article class="photo-card">
-          <img src="assets/images/before-temple-selfie.jpg" />
-          <p>Our first blessings together.</p>
-        </article>
-        <article class="photo-card">
-          <img src="assets/images/before-temple-portrait.jpg" />
-          <p>You already looked like home.</p>
-        </article>
+        <article class="photo-card active"><img src="assets/images/before-car.jpg"/><p>Back when we were still slowly becoming us.</p></article>
+        <article class="photo-card"><img src="assets/images/before-temple-selfie.jpg"/><p>Our first blessings together.</p></article>
+        <article class="photo-card"><img src="assets/images/before-temple-portrait.jpg"/><p>You already looked like home.</p></article>
         <div class="swipe">Swipe / tap photo →</div>
       </div>
       <button class="primary" onclick="next()">Next page</button>
     </section>
 
-    <section class="screen wedding">
+    <section class="screen wedding" data-scene="petals">
       <p class="tag">February 5</p>
       <h2>The day I stopped saying “I” and started saying “We”.</h2>
-      <figure class="single-photo">
-        <img src="assets/images/wedding-mangalsutra.jpg" />
+      <figure class="hero-photo">
+        <img src="assets/images/wedding-mangalsutra.jpg"/>
         <figcaption>The day I got to call you my wife.</figcaption>
       </figure>
       <button class="primary" onclick="next()">Continue</button>
     </section>
 
-    <section class="screen wedding">
+    <section class="screen wedding" data-scene="petals">
       <p class="tag">The best decision</p>
       <h2>My favorite person became my family.</h2>
-      <figure class="single-photo">
-        <img src="assets/images/wedding-akshata.jpg" />
+      <figure class="hero-photo">
+        <img src="assets/images/wedding-akshata.jpg"/>
         <figcaption>I still remember this smile like yesterday.</figcaption>
       </figure>
       <button class="primary" onclick="next()">Five months later</button>
     </section>
 
-    <section class="screen memory">
+    <section class="screen memory" data-scene="light">
       <p class="tag">Five months later</p>
       <h2>Small fights, big laughs, and a life slowly becoming ours.</h2>
       <div class="carousel" data-carousel>
-        <article class="photo-card active">
-          <img src="assets/images/mountain.jpg" />
-          <p>Partners in every climb, every laugh, every adventure.</p>
-        </article>
-        <article class="photo-card">
-          <img src="assets/images/boxing.jpg" />
-          <p>Beautiful... but also dangerous. 😂</p>
-        </article>
-        <article class="photo-card">
-          <img src="assets/images/holi.jpg" />
-          <p>Life has been far more colorful since you came into it.</p>
-        </article>
-        <article class="photo-card">
-          <img src="assets/images/leo.jpg" />
-          <p>Winning your heart was special. Winning Leo’s approval was the real achievement. 🐾</p>
-        </article>
+        <article class="photo-card active"><img src="assets/images/mountain.jpg"/><p>Partners in every climb, every laugh, every adventure.</p></article>
+        <article class="photo-card"><img src="assets/images/boxing.jpg"/><p>Beautiful... but also dangerous. 😂</p></article>
+        <article class="photo-card"><img src="assets/images/holi.jpg"/><p>Life has been far more colorful since you came into it.</p></article>
+        <article class="photo-card"><img src="assets/images/leo.jpg"/><p>Winning your heart was special. Winning Leo’s approval was the real achievement. 🐾</p></article>
         <div class="swipe">Swipe / tap photo →</div>
       </div>
       <button class="primary" onclick="next()">Our adventures</button>
     </section>
 
-    <section class="screen memory">
+    <section class="screen memory ocean" data-scene="ocean">
       <p class="tag">Our little adventures</p>
       <h2>Every place became special because you were there.</h2>
       <div class="carousel" data-carousel>
-        <article class="photo-card active">
-          <img src="assets/images/boracay.jpg" />
-          <p>The sunset was beautiful. But I kept looking at you.</p>
-        </article>
-        <article class="photo-card">
-          <img src="assets/images/date.jpg" />
-          <p>Every date with you becomes my favorite memory.</p>
-        </article>
-        <article class="photo-card">
-          <img src="assets/images/flight-sleep.jpg" />
-          <p>Even on a crowded flight, my favorite place was wherever you were.</p>
-        </article>
-        <article class="photo-card">
-          <img src="assets/images/selfie.jpg" />
-          <p>One selfie... thousands more to come.</p>
-        </article>
+        <article class="photo-card active"><img src="assets/images/boracay.jpg"/><p>The sunset was beautiful. But I kept looking at you.</p></article>
+        <article class="photo-card"><img src="assets/images/date.jpg"/><p>Every date with you becomes my favorite memory.</p></article>
+        <article class="photo-card"><img src="assets/images/flight-sleep.jpg"/><p>Even on a crowded flight, my favorite place was wherever you were.</p></article>
+        <article class="photo-card"><img src="assets/images/selfie.jpg"/><p>One selfie... thousands more to come.</p></article>
         <div class="swipe">Swipe / tap photo →</div>
       </div>
       <button class="primary" onclick="next()">Birthday time</button>
     </section>
 
-    <section class="screen cake-screen">
-      <div class="elephant">🐘🎈</div>
+    <section class="screen cake-screen" data-scene="light">
+      <div class="elephant-mini">🐘🎈</div>
       <p class="tag">Make a wish</p>
       <h2>Happy Birthday, Sundri 💜</h2>
-      <p>Tap the candle to blow it out.</p>
+      <p class="sub">Tap the candle to blow it out.</p>
       <div class="cake" id="cake" onclick="blowCandle()">
-        <div class="flame"></div>
-        <div class="candle"></div>
-        <div class="cake-top"></div>
-        <div class="cake-base">Sundri</div>
-        <div class="plate"></div>
+        <div class="flame"></div><div class="candle"></div><div class="cake-top"></div><div class="cake-base">Sundri</div><div class="plate"></div>
       </div>
       <button class="soft-btn" onclick="fakeSkip()">I’m impatient 😏</button>
     </section>
 
-    <section class="screen final">
+    <section class="screen final" data-scene="heart">
       <p class="tag">From your husband</p>
+      <div class="final-heart">💜</div>
       <div class="final-letter">
-        <h2>Happy Birthday, Sundri 💜</h2>
+        <h2>Happy Birthday, Sundri</h2>
         <p>Five months ago, on February 5, you became my wife.</p>
         <p>Since then, you have turned ordinary days into beautiful memories.</p>
         <p>Thank you for laughing with me, travelling with me, praying with me, being silly with me, and simply being by my side.</p>
@@ -165,8 +135,8 @@
       <button class="primary" onclick="next()">One more thing...</button>
     </section>
 
-    <section class="screen secret">
-      <div class="elephant big-elephant">🐘💜</div>
+    <section class="screen secret" data-scene="dark">
+      <div class="elephant-mini big">🐘💜</div>
       <h2>Wait...</h2>
       <p>Don’t close this yet.</p>
       <div class="secret-note">
