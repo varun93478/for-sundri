@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To Sundri ❤️</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="stars"></div>
+  <button class="sound-btn" id="soundBtn">Sound ✦</button>
+
+  <main class="app">
+    <section class="screen active intro">
+      <div class="glow-card">
+        <p class="eyebrow">A birthday surprise</p>
+        <h1>To Sundri ❤️</h1>
+        <p>From your annoying husband, Varun.</p>
+        <button class="primary" onclick="next()">Open</button>
+      </div>
+    </section>
+
+    <section class="screen message">
+      <div class="phone-card">
+        <div class="notif-top">❤️ Varun</div>
+        <h2>Hey Sundri...</h2>
+        <p>Before everyone wishes you today, I wanted to tell you our little story.</p>
+        <button class="primary" onclick="next()">Read it</button>
+        <button class="skip" onclick="fakeSkip()">I’m impatient 😏</button>
+      </div>
+    </section>
+
+    <section class="screen chapter">
+      <p class="eyebrow">Chapter 01</p>
+      <h2>Before “Us”</h2>
+      <div class="photo-stack">
+        <img src="assets/images/before-car.jpg" />
+        <img src="assets/images/before-temple-selfie.jpg" />
+        <img src="assets/images/before-temple-portrait.jpg" />
+      </div>
+      <p class="caption">Two people, one beautiful beginning.</p>
+      <button class="primary" onclick="next()">Next</button>
+    </section>
+
+    <section class="screen photo-screen">
+      <p class="eyebrow">Feb 5</p>
+      <h2>The day everything changed</h2>
+      <img class="hero-img" src="assets/images/wedding-mangalsutra.jpg" />
+      <p class="caption">The day I got to call you my wife.</p>
+      <button class="primary" onclick="next()">Continue</button>
+    </section>
+
+    <section class="screen photo-screen">
+      <p class="eyebrow">Wedding memory</p>
+      <h2>The happiest smile</h2>
+      <img class="hero-img" src="assets/images/wedding-akshata.jpg" />
+      <p class="caption">I still remember this moment like yesterday.</p>
+      <button class="primary" onclick="next()">Continue</button>
+    </section>
+
+    <section class="screen gallery">
+      <p class="eyebrow">Chapter 03</p>
+      <h2>5 months of us</h2>
+      <div class="grid">
+        <img src="assets/images/leo.jpg" />
+        <img src="assets/images/boxing.jpg" />
+        <img src="assets/images/selfie.jpg" />
+        <img src="assets/images/holi.jpg" />
+      </div>
+      <p class="caption">Little fights, big laughs, and memories that became ours.</p>
+      <button class="primary" onclick="next()">Our adventures</button>
+    </section>
+
+    <section class="screen gallery">
+      <p class="eyebrow">Chapter 04</p>
+      <h2>Making memories</h2>
+      <div class="grid">
+        <img src="assets/images/boracay.jpg" />
+        <img src="assets/images/mountain.jpg" />
+        <img src="assets/images/date.jpg" />
+        <img src="assets/images/flight-sleep.jpg" />
+      </div>
+      <p class="caption">Every place became special because you were there.</p>
+      <button class="primary" onclick="next()">Birthday time 🎂</button>
+    </section>
+
+    <section class="screen cake-screen">
+      <p class="eyebrow">Make a wish</p>
+      <h2>Happy Birthday, Sundri</h2>
+      <p>Tap the cake to blow the candle.</p>
+      <div class="cake" id="cake" onclick="blowCandle()">
+        <div class="flame"></div>
+        <div class="candle"></div>
+        <div class="cake-base">Sundri</div>
+        <div class="plate"></div>
+      </div>
+      <button class="skip" onclick="fakeSkip()">I’m impatient 😏</button>
+    </section>
+
+    <section class="screen final">
+      <p class="eyebrow">From your husband</p>
+      <h2>Happy Birthday, Sundri ❤️</h2>
+      <p>Five months ago, on February 5, you became my wife. Since then, you have made ordinary days feel special.</p>
+      <p>Thank you for laughing with me, travelling with me, being silly with me, and simply being by my side.</p>
+      <p>I hope this birthday is the first of many we celebrate together. Here’s to growing older while never growing apart.</p>
+      <h3>I love you. — Varun ❤️</h3>
+      <button class="primary" onclick="restart()">Replay</button>
+    </section>
+  </main>
+
+  <div class="modal" id="skipModal">
+    <div class="modal-card">
+      <h2>Nice try, Sundri 😄</h2>
+      <p>You already waited for me. Now wait just a little longer. ❤️</p>
+      <button class="primary" onclick="closeSkip()">Continue</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
