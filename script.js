@@ -5,6 +5,7 @@ function go(n){
   screens.forEach(s=>s.classList.remove("active"));
   current=n;
   screens[n].classList.add("active");
+  if(n===3) resetHoldReveal();
   if(n!==5) pauseMemoryVideo();
   if(n===5) resetMemoryChapter();
   burstSparks(innerWidth/2, innerHeight/2, 18);
@@ -87,12 +88,117 @@ document.querySelectorAll(".deck").forEach(deck=>{
 
 /* Hold reveal */
 const hold=document.getElementById("holdPhoto");
-let holdTimer;
-hold.addEventListener("pointerdown",()=>{
-  holdTimer=setTimeout(()=>{hold.classList.add("revealed");confettiBurst(50)},700);
+const weddingScreen=hold?.closest(".screen");
+const holdText=document.getElementById("holdText");
+const holdContinue=document.getElementById("holdContinue");
+const holdQuote=holdText ? holdText.textContent : "";
+let holdTimers=[],holdSparkTimer,holdTypingTimer,holdRevealed=false,isHolding=false;
+
+function clearHoldTimers(){
+  holdTimers.forEach(timer=>clearTimeout(timer));
+  holdTimers=[];
+  clearInterval(holdSparkTimer);
+  clearTimeout(holdTypingTimer);
+}
+
+function resetHoldReveal(){
+  if(!hold) return;
+  isHolding=false;
+  holdRevealed=false;
+  clearHoldTimers();
+  hold.classList.remove("holding","hold-dark","heartbeat","ring-pulse","brightening","revealed","hold-glow");
+  weddingScreen?.classList.remove("wedding-dark");
+  hold.querySelectorAll(".hold-sparkle").forEach(sparkle=>sparkle.remove());
+  if(holdText){
+    holdText.textContent=holdQuote;
+    holdText.classList.remove("revealing");
+  }
+  holdContinue?.classList.remove("show");
+}
+
+function addHoldTimer(fn,delay){
+  const timer=setTimeout(fn,delay);
+  holdTimers.push(timer);
+}
+
+function createHoldSparkle(){
+  if(!hold || !isHolding || holdRevealed) return;
+  const sparkle=document.createElement("span");
+  sparkle.className="hold-sparkle";
+  sparkle.style.left=18+Math.random()*64+"%";
+  sparkle.style.top=62+Math.random()*25+"%";
+  sparkle.style.setProperty("--spark-x",(-18+Math.random()*36)+"px");
+  sparkle.style.setProperty("--spark-delay",Math.random()*0.25+"s");
+  sparkle.style.background=["#d8c3ff","#fff","#ffd166"][Math.floor(Math.random()*3)];
+  hold.appendChild(sparkle);
+  setTimeout(()=>sparkle.remove(),2200);
+}
+
+function typeHoldQuote(){
+  if(!holdText) return;
+  clearTimeout(holdTypingTimer);
+  holdText.textContent="";
+  let i=0;
+  function tick(){
+    holdText.textContent=holdQuote.slice(0,i++);
+    if(i<=holdQuote.length) holdTypingTimer=setTimeout(tick,34);
+  }
+  tick();
+}
+
+function completeHoldReveal(){
+  if(!isHolding || holdRevealed) return;
+  holdRevealed=true;
+  clearHoldTimers();
+  hold.classList.remove("holding","hold-dark","heartbeat","ring-pulse","brightening");
+  weddingScreen?.classList.remove("wedding-dark");
+  hold.classList.add("revealed","hold-glow");
+  holdText?.classList.add("revealing");
+  holdContinue?.classList.add("show");
+  typeHoldQuote();
+  confettiBurst(50);
+}
+
+function cancelHoldReveal(){
+  if(holdRevealed) return;
+  isHolding=false;
+  clearHoldTimers();
+  hold.classList.remove("holding","hold-dark","heartbeat","ring-pulse","brightening","hold-glow");
+  weddingScreen?.classList.remove("wedding-dark");
+  hold.querySelectorAll(".hold-sparkle").forEach(sparkle=>sparkle.remove());
+}
+
+function startHoldReveal(e){
+  if(holdRevealed) return;
+  e.preventDefault();
+  e.stopPropagation();
+  isHolding=true;
+  clearHoldTimers();
+  hold.setPointerCapture && e.pointerId!==undefined && hold.setPointerCapture(e.pointerId);
+  navigator.vibrate && navigator.vibrate(35);
+  hold.classList.add("holding");
+  addHoldTimer(()=>{
+    hold.classList.add("hold-dark");
+    weddingScreen?.classList.add("wedding-dark");
+  },100);
+  addHoldTimer(()=>hold.classList.add("heartbeat"),200);
+  addHoldTimer(()=>hold.classList.add("ring-pulse"),250);
+  addHoldTimer(()=>{
+    createHoldSparkle();
+    holdSparkTimer=setInterval(createHoldSparkle,150);
+  },350);
+  addHoldTimer(()=>hold.classList.add("brightening"),500);
+  addHoldTimer(completeHoldReveal,700);
+}
+
+["contextmenu","selectstart","dragstart"].forEach(eventName=>{
+  hold.addEventListener(eventName,e=>e.preventDefault());
 });
-hold.addEventListener("pointerup",()=>clearTimeout(holdTimer));
-hold.addEventListener("pointerleave",()=>clearTimeout(holdTimer));
+hold.addEventListener("pointerdown",startHoldReveal,{passive:false});
+hold.addEventListener("touchstart",e=>e.preventDefault(),{passive:false});
+hold.addEventListener("pointerup",cancelHoldReveal);
+hold.addEventListener("pointercancel",cancelHoldReveal);
+hold.addEventListener("pointerleave",cancelHoldReveal);
 
 function openMemory(img,text){
   document.getElementById("modalImg").src="assets/images/"+img;
