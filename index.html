@@ -70,7 +70,44 @@
       <button onclick="go(5)">Birthday time</button>
     </section>
 
-    <section class="screen cake-screen" id="s5">
+    <section class="screen video-chapter" id="s5">
+      <div class="video-particles" aria-hidden="true"></div>
+      <div class="video-intro" id="videoIntro">
+        <div class="video-elephant" aria-hidden="true">🐘</div>
+        <p class="mini">A little memory...</p>
+        <h2>Leo wanted to show you something...</h2>
+        <button class="gift-box" id="giftBox" type="button" aria-label="Tap to unwrap">
+          <span class="gift-ear left"></span>
+          <span class="gift-ear right"></span>
+          <span class="gift-lid"></span>
+          <span class="gift-ribbon vertical"></span>
+          <span class="gift-ribbon horizontal"></span>
+          <span class="gift-body">🎁</span>
+        </button>
+        <p class="hint">Tap to unwrap</p>
+      </div>
+
+      <div class="memory-video-wrap" id="memoryVideoWrap" aria-hidden="true">
+        <video id="memoryVideo" playsinline preload="metadata">
+          <source src="assets/videos/memory.mp4" type="video/mp4">
+        </video>
+        <div class="video-actions">
+          <button type="button" id="videoSkip">Skip</button>
+          <button type="button" id="videoReplay">Replay</button>
+          <button type="button" id="videoSound">Sound</button>
+        </div>
+      </div>
+
+      <div class="video-after" id="videoAfter" aria-hidden="true">
+        <p class="type-line" data-text="Some memories..."></p>
+        <p class="type-line" data-text="...don't need words."></p>
+        <p class="type-line" data-text="They only need us."></p>
+        <p class="heart-line">❤️</p>
+        <button type="button" id="memoryContinue">Continue</button>
+      </div>
+    </section>
+
+    <section class="screen cake-screen" id="s6">
       <p class="mini">Make a wish</p>
       <h2>Happy Birthday, Sundri 💜</h2>
       <p>Tap the candle to blow it out.</p>
@@ -79,7 +116,7 @@
       </div>
     </section>
 
-    <section class="screen" id="s6">
+    <section class="screen" id="s7">
       <p class="mini">One final note</p>
       <h2>Open the envelope</h2>
       <div class="envelope" onclick="openLetter()">
@@ -92,10 +129,10 @@
           <b>Forever your annoying husband,<br>Varun ❤️</b>
         </div>
       </div>
-      <button onclick="go(7)">One more thing</button>
+      <button onclick="go(8)">One more thing</button>
     </section>
 
-    <section class="screen" id="s7">
+    <section class="screen" id="s8">
       <div class="elephant big">🐘💜</div>
       <h1>Chapter One.</h1>
       <p>This isn’t our story’s ending...</p>
@@ -112,6 +149,7 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
