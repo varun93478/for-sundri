@@ -1,3 +1,3 @@
-# For Sundri V5 VFX 💜
+# Version X - Sundri Birthday Elephant Journey
 
-More interaction, VFX, swipe, progress, sparks, petals, elephant theme.
+Game-like elephant gate journey. Upload files to GitHub root.
