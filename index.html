@@ -2,154 +2,161 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>To Sundri ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>For Sundri ❤️</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="paper-bg"></div>
-  <div class="float-hearts" id="floatHearts"></div>
-
+  <canvas id="threeCanvas"></canvas>
+  <div class="grain"></div>
   <button class="sound-btn" id="soundBtn">Sound ✦</button>
 
   <main class="app">
-    <section class="screen active intro">
-      <div class="note-card">
-        <p class="eyebrow">A small birthday note</p>
-        <h1>To Sundri ❤️</h1>
-        <p>Not a perfect website. Just something I made with love.</p>
-        <button class="primary" onclick="next()">Open</button>
+    <section class="screen active loading">
+      <div class="tiny">For Sundri</div>
+      <h1>Loading memories...</h1>
+      <div class="loader"><span></span></div>
+      <div class="found-list">
+        <p>Found: 178 smiles</p>
+        <p>Found: 42 adventures</p>
+        <p>Found: 5 months together</p>
+        <p>Found: 1 beautiful wife</p>
       </div>
+      <button class="primary hidden-start" onclick="next()">Begin</button>
     </section>
 
-    <section class="screen message">
-      <div class="message-card">
-        <div class="message-top">❤️ Varun</div>
-        <h2>Hey Sundri...</h2>
-        <p>Before everyone wishes you today, I wanted to show you a few pieces of our story.</p>
-        <button class="primary" onclick="next()">Read it</button>
-        <button class="skip" onclick="fakeSkip()">I’m impatient 😏</button>
+    <section class="screen intro">
+      <div class="type-card">
+        <p class="typing" id="typingText"></p>
       </div>
+      <button class="primary" onclick="next()">Tap to continue</button>
+      <button class="soft-btn" onclick="fakeSkip()">I’m impatient 😏</button>
     </section>
 
-    <section class="screen chapter">
-      <p class="eyebrow">Chapter 01</p>
-      <h2>Before “Us”</h2>
-
-      <div class="swipe-wrap" data-carousel>
-        <div class="swipe-card active">
+    <section class="screen diary">
+      <p class="label">Before I met you</p>
+      <h2>Life was just life. Then one day, you happened.</h2>
+      <div class="swipe-book" data-carousel>
+        <article class="memory-page active">
           <img src="assets/images/before-car.jpg" />
           <p>Back when we were still slowly becoming us.</p>
-        </div>
-        <div class="swipe-card">
+        </article>
+        <article class="memory-page">
           <img src="assets/images/before-temple-selfie.jpg" />
           <p>Our first blessings together.</p>
-        </div>
-        <div class="swipe-card">
+        </article>
+        <article class="memory-page">
           <img src="assets/images/before-temple-portrait.jpg" />
-          <p>We had no idea how beautiful the next few months would become.</p>
-        </div>
-        <div class="swipe-hint">Swipe photo →</div>
+          <p>You already looked like home.</p>
+        </article>
+        <div class="swipe-tip">Swipe / tap photo</div>
       </div>
-
-      <button class="primary" onclick="next()">Next</button>
+      <button class="primary" onclick="next()">Next page</button>
     </section>
 
-    <section class="screen photo-screen">
-      <p class="eyebrow">Feb 5</p>
-      <h2>The day everything changed</h2>
-      <figure class="memory-photo">
+    <section class="screen wedding">
+      <p class="label">February 5</p>
+      <h2>The day I stopped saying “I” and started saying “We”.</h2>
+      <figure class="cinema-photo">
         <img src="assets/images/wedding-mangalsutra.jpg" />
         <figcaption>The day I got to call you my wife.</figcaption>
       </figure>
       <button class="primary" onclick="next()">Continue</button>
     </section>
 
-    <section class="screen photo-screen">
-      <p class="eyebrow">Wedding memory</p>
-      <h2>The happiest smile</h2>
-      <figure class="memory-photo">
+    <section class="screen wedding">
+      <p class="label">The best decision</p>
+      <h2>My favorite person became my family.</h2>
+      <figure class="cinema-photo">
         <img src="assets/images/wedding-akshata.jpg" />
-        <figcaption>I still remember this moment like yesterday.</figcaption>
+        <figcaption>I still remember this smile like yesterday.</figcaption>
       </figure>
-      <button class="primary" onclick="next()">Continue</button>
+      <button class="primary" onclick="next()">Five months later</button>
     </section>
 
-    <section class="screen chapter">
-      <p class="eyebrow">Chapter 03</p>
-      <h2>5 months of us</h2>
-
-      <div class="swipe-wrap" data-carousel>
-        <div class="swipe-card active">
-          <img src="assets/images/leo.jpg" />
-          <p>You didn’t just win my heart... Leo approved too. 🐾</p>
-        </div>
-        <div class="swipe-card">
+    <section class="screen diary">
+      <p class="label">Five months later</p>
+      <h2>Small fights, big laughs, and a life slowly becoming ours.</h2>
+      <div class="swipe-book" data-carousel>
+        <article class="memory-page active">
+          <img src="assets/images/mountain.jpg" />
+          <p>Partners in every climb, every laugh, every adventure.</p>
+        </article>
+        <article class="memory-page">
           <img src="assets/images/boxing.jpg" />
-          <p>Cute, but also dangerous. I know not to argue too much. 😂</p>
-        </div>
-        <div class="swipe-card">
-          <img src="assets/images/selfie.jpg" />
-          <p>One selfie... thousands more to come.</p>
-        </div>
-        <div class="swipe-card">
+          <p>Beautiful... but also dangerous. 😂</p>
+        </article>
+        <article class="memory-page">
           <img src="assets/images/holi.jpg" />
-          <p>Normal? Never. And I love that about us.</p>
-        </div>
-        <div class="swipe-hint">Swipe photo →</div>
+          <p>Life has been far more colorful since you came into it.</p>
+        </article>
+        <article class="memory-page">
+          <img src="assets/images/leo.jpg" />
+          <p>Winning your heart was special. Winning Leo’s approval was the real achievement. 🐾</p>
+        </article>
+        <div class="swipe-tip">Swipe / tap photo</div>
       </div>
-
       <button class="primary" onclick="next()">Our adventures</button>
     </section>
 
-    <section class="screen chapter">
-      <p class="eyebrow">Chapter 04</p>
-      <h2>Making memories</h2>
-
-      <div class="swipe-wrap" data-carousel>
-        <div class="swipe-card active">
+    <section class="screen diary ocean">
+      <p class="label">Our little adventures</p>
+      <h2>Every place became special because you were there.</h2>
+      <div class="swipe-book" data-carousel>
+        <article class="memory-page active">
           <img src="assets/images/boracay.jpg" />
-          <p>Watching you enjoy life is my favorite view.</p>
-        </div>
-        <div class="swipe-card">
-          <img src="assets/images/mountain.jpg" />
-          <p>Partners in crime... and in every adventure.</p>
-        </div>
-        <div class="swipe-card">
+          <p>The sunset was beautiful. But I kept looking at you.</p>
+        </article>
+        <article class="memory-page">
           <img src="assets/images/date.jpg" />
           <p>Every date with you becomes my favorite memory.</p>
-        </div>
-        <div class="swipe-card">
+        </article>
+        <article class="memory-page">
           <img src="assets/images/flight-sleep.jpg" />
-          <p>Even sleeping, you looked adorable.</p>
-        </div>
-        <div class="swipe-hint">Swipe photo →</div>
+          <p>Even on a crowded flight, my favorite place was wherever you were.</p>
+        </article>
+        <article class="memory-page">
+          <img src="assets/images/selfie.jpg" />
+          <p>One selfie... thousands more to come.</p>
+        </article>
+        <div class="swipe-tip">Swipe / tap photo</div>
       </div>
-
-      <button class="primary" onclick="next()">Birthday time 🎂</button>
+      <button class="primary" onclick="next()">Birthday time</button>
     </section>
 
     <section class="screen cake-screen">
-      <p class="eyebrow">Make a wish</p>
-      <h2>Happy Birthday, Sundri</h2>
-      <p>Tap the cake to blow the candle.</p>
+      <p class="label">Make a wish</p>
+      <h2>Happy Birthday, Sundri ❤️</h2>
+      <p class="sub">Tap the candle to blow it out.</p>
       <div class="cake" id="cake" onclick="blowCandle()">
         <div class="flame"></div>
         <div class="candle"></div>
+        <div class="cake-top"></div>
         <div class="cake-base">Sundri</div>
         <div class="plate"></div>
       </div>
-      <button class="skip" onclick="fakeSkip()">I’m impatient 😏</button>
+      <button class="soft-btn" onclick="fakeSkip()">I’m impatient 😏</button>
     </section>
 
     <section class="screen final">
-      <p class="eyebrow">From your husband</p>
+      <p class="label">From your husband</p>
       <div class="letter">
         <h2>Happy Birthday, Sundri ❤️</h2>
-        <p>Five months ago, on February 5, you became my wife. Since then, you have made ordinary days feel special.</p>
-        <p>Thank you for laughing with me, travelling with me, being silly with me, and simply being by my side.</p>
-        <p>I hope this birthday is the first of many we celebrate together. Here’s to growing older while never growing apart.</p>
-        <h3>I love you. — Varun ❤️</h3>
+        <p>Five months ago, on February 5, you became my wife.</p>
+        <p>Since then, you have turned ordinary days into beautiful memories.</p>
+        <p>Thank you for laughing with me, travelling with me, praying with me, being silly with me, and simply being by my side.</p>
+        <p>I can’t promise life will always be easy. But I promise you will never walk through it alone.</p>
+        <h3>I love you. Forever your annoying husband, Varun ❤️</h3>
+      </div>
+      <button class="primary" onclick="next()">One more thing...</button>
+    </section>
+
+    <section class="screen secret">
+      <h2>Wait...</h2>
+      <p>Don’t close this yet.</p>
+      <div class="secret-note">
+        <p>Your birthday is not over.</p>
+        <p>Now go find your real surprise. 🎁</p>
       </div>
       <button class="primary" onclick="restart()">Replay</button>
     </section>
@@ -163,6 +170,7 @@
     </div>
   </div>
 
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

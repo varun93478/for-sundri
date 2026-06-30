@@ -1,3 +1,5 @@
-# To Sundri ❤️
+# For Sundri V3 ❤️
 
-Version 2: handmade scrapbook style with swipeable memories.
+Static Three.js birthday experience.
+
+Upload these files to the root of GitHub repo and Vercel will deploy.
