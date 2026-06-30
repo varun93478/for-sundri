@@ -1,5 +1,3 @@
-# For Sundri V3 ❤️
+# For Sundri V4 Elephant Theme 💜
 
-Static Three.js birthday experience.
-
-Upload these files to the root of GitHub repo and Vercel will deploy.
+Upload files to GitHub root. Vercel auto-deploys.

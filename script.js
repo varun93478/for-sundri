@@ -2,10 +2,9 @@ let current=0;
 const screens=[...document.querySelectorAll(".screen")];
 
 function show(index){
-  screens.forEach(screen=>screen.classList.remove("active"));
+  screens.forEach(s=>s.classList.remove("active"));
   screens[index].classList.add("active");
-  if(index===1) typeIntro();
-  if(index===3 || index===4) petals(18);
+  if(index===4 || index===5) petals(22);
 }
 
 function next(){
@@ -29,52 +28,28 @@ function closeSkip(){
   document.getElementById("skipModal").classList.remove("active");
 }
 
-let typed=false;
-function typeIntro(){
-  if(typed) return;
-  typed=true;
-  const text=`Hey Sundri...
-
-Happy Birthday ❤️
-
-I wanted to buy you something.
-
-Then I realized...
-
-The best gift is remembering everything that made us... us.`;
-  const el=document.getElementById("typingText");
-  let i=0;
-  function type(){
-    if(i<=text.length){
-      el.textContent=text.slice(0,i);
-      i++;
-      setTimeout(type,42);
-    }
-  }
-  type();
-}
-
 document.querySelectorAll("[data-carousel]").forEach((carousel)=>{
-  const cards=[...carousel.querySelectorAll(".memory-page")];
+  const cards=[...carousel.querySelectorAll(".photo-card")];
   let index=0,startX=0,endX=0;
   function render(){
     cards.forEach((card,i)=>{
       card.classList.remove("active","prev","next");
-      if(i===index)card.classList.add("active");
-      else if(i===((index-1+cards.length)%cards.length))card.classList.add("prev");
-      else if(i===((index+1)%cards.length))card.classList.add("next");
+      if(i===index) card.classList.add("active");
+      else if(i===((index-1+cards.length)%cards.length)) card.classList.add("prev");
+      else if(i===((index+1)%cards.length)) card.classList.add("next");
     });
   }
   function move(dir){
     index=(index+dir+cards.length)%cards.length;
     render();
+    footprints();
   }
   carousel.addEventListener("click",(e)=>{if(!e.target.closest("button"))move(1)});
   carousel.addEventListener("touchstart",(e)=>{startX=e.touches[0].clientX},{passive:true});
   carousel.addEventListener("touchend",(e)=>{
     endX=e.changedTouches[0].clientX;
     const diff=endX-startX;
-    if(Math.abs(diff)>40)move(diff<0?1:-1);
+    if(Math.abs(diff)>40) move(diff<0?1:-1);
   },{passive:true});
   render();
 });
@@ -93,9 +68,10 @@ function confetti(){
   const c=document.createElement("div");
   c.className="confetti";
   c.style.left=Math.random()*100+"vw";
-  c.style.background=["#ff5da2","#ffd166","#9b5cff","#ffffff","#7dd3fc"][Math.floor(Math.random()*5)];
+  c.style.width="10px";
+  c.style.height="16px";
+  c.style.background=["#6f2da8","#c7a7ff","#ffffff","#ffd166","#b58eff"][Math.floor(Math.random()*5)];
   c.style.animationDuration=1.8+Math.random()*2+"s";
-  c.style.transform="rotate("+Math.random()*360+"deg)";
   document.body.appendChild(c);
   setTimeout(()=>c.remove(),4000);
 }
@@ -105,15 +81,68 @@ function petals(count){
     setTimeout(()=>{
       const p=document.createElement("div");
       p.className="petal";
-      p.textContent=["🌸","🌺","💮"][Math.floor(Math.random()*3)];
+      p.textContent=["🌸","💜","🤍"][Math.floor(Math.random()*3)];
       p.style.left=Math.random()*100+"vw";
-      p.style.fontSize=16+Math.random()*16+"px";
+      p.style.fontSize=14+Math.random()*16+"px";
       p.style.animationDuration=3+Math.random()*3+"s";
       document.body.appendChild(p);
       setTimeout(()=>p.remove(),6000);
+    },i*80);
+  }
+}
+
+function footprints(){
+  for(let i=0;i<4;i++){
+    setTimeout(()=>{
+      const f=document.createElement("div");
+      f.className="petal";
+      f.textContent="🐾";
+      f.style.left=(35+i*8+Math.random()*10)+"vw";
+      f.style.fontSize="18px";
+      f.style.animationDuration="2.5s";
+      document.body.appendChild(f);
+      setTimeout(()=>f.remove(),3000);
     },i*90);
   }
 }
+
+/* Simple canvas sparkle + elephant balloon ambience */
+const canvas=document.getElementById("magicCanvas");
+const ctx=canvas.getContext("2d");
+let w,h,particles=[];
+function resize(){
+  w=canvas.width=window.innerWidth*devicePixelRatio;
+  h=canvas.height=window.innerHeight*devicePixelRatio;
+  canvas.style.width=window.innerWidth+"px";
+  canvas.style.height=window.innerHeight+"px";
+}
+window.addEventListener("resize",resize);
+resize();
+
+for(let i=0;i<70;i++){
+  particles.push({
+    x:Math.random()*w,
+    y:Math.random()*h,
+    r:(1+Math.random()*2)*devicePixelRatio,
+    vx:(Math.random()-.5)*.25*devicePixelRatio,
+    vy:(Math.random()-.5)*.25*devicePixelRatio,
+    a:.25+Math.random()*.45
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,w,h);
+  particles.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(111,45,168,${p.a})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
 
 let audioCtx,timer,playing=false;
 document.getElementById("soundBtn").addEventListener("click",()=>playing?stopSound():startSound());
@@ -146,70 +175,6 @@ function startSound(){
 function stopSound(){
   playing=false;
   clearTimeout(timer);
-  if(audioCtx)audioCtx.close();
+  if(audioCtx) audioCtx.close();
   document.getElementById("soundBtn").textContent="Sound ✦";
-}
-
-/* Three.js heart stars */
-let scene,camera,renderer,particles,heartParticles;
-initThree();
-animateThree();
-
-function initThree(){
-  const canvas=document.getElementById("threeCanvas");
-  scene=new THREE.Scene();
-  camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,.1,1000);
-  camera.position.z=36;
-  renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
-  renderer.setSize(window.innerWidth,window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-
-  const starGeo=new THREE.BufferGeometry();
-  const starCount=900;
-  const starPos=new Float32Array(starCount*3);
-  for(let i=0;i<starCount;i++){
-    starPos[i*3]=(Math.random()-.5)*95;
-    starPos[i*3+1]=(Math.random()-.5)*95;
-    starPos[i*3+2]=(Math.random()-.5)*95;
-  }
-  starGeo.setAttribute("position",new THREE.BufferAttribute(starPos,3));
-  const starMat=new THREE.PointsMaterial({color:0xffffff,size:.08,transparent:true,opacity:.72});
-  particles=new THREE.Points(starGeo,starMat);
-  scene.add(particles);
-
-  const heartGeo=new THREE.BufferGeometry();
-  const count=320;
-  const pos=new Float32Array(count*3);
-  for(let i=0;i<count;i++){
-    const t=(i/count)*Math.PI*2;
-    const x=16*Math.pow(Math.sin(t),3);
-    const y=13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t);
-    pos[i*3]=x*.55 + (Math.random()-.5)*.35;
-    pos[i*3+1]=y*.55 + (Math.random()-.5)*.35;
-    pos[i*3+2]=(Math.random()-.5)*2;
-  }
-  heartGeo.setAttribute("position",new THREE.BufferAttribute(pos,3));
-  const heartMat=new THREE.PointsMaterial({color:0xff5da2,size:.13,transparent:true,opacity:.9});
-  heartParticles=new THREE.Points(heartGeo,heartMat);
-  heartParticles.position.y=2;
-  scene.add(heartParticles);
-
-  window.addEventListener("resize",()=>{
-    camera.aspect=window.innerWidth/window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth,window.innerHeight);
-  });
-}
-
-function animateThree(){
-  requestAnimationFrame(animateThree);
-  if(particles){
-    particles.rotation.y+=.0007;
-    particles.rotation.x+=.0002;
-  }
-  if(heartParticles){
-    heartParticles.rotation.z=Math.sin(Date.now()*0.001)*0.035;
-    heartParticles.scale.setScalar(1+Math.sin(Date.now()*0.002)*0.035);
-  }
-  renderer.render(scene,camera);
 }

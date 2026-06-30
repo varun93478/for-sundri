@@ -3,61 +3,74 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>For Sundri ❤️</title>
+  <title>For Sundri 💜</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <canvas id="threeCanvas"></canvas>
-  <div class="grain"></div>
+  <canvas id="magicCanvas"></canvas>
+  <div class="paper"></div>
+
   <button class="sound-btn" id="soundBtn">Sound ✦</button>
 
   <main class="app">
-    <section class="screen active loading">
-      <div class="tiny">For Sundri</div>
-      <h1>Loading memories...</h1>
-      <div class="loader"><span></span></div>
-      <div class="found-list">
-        <p>Found: 178 smiles</p>
-        <p>Found: 42 adventures</p>
-        <p>Found: 5 months together</p>
-        <p>Found: 1 beautiful wife</p>
-      </div>
-      <button class="primary hidden-start" onclick="next()">Begin</button>
+    <section class="screen active landing">
+      <div class="elephant big-elephant">🐘</div>
+      <p class="mini">A tiny birthday world</p>
+      <h1>Hey Sundri 💜</h1>
+      <p>Something special is waiting for you...</p>
+      <button class="primary" onclick="next()">Tap to open</button>
     </section>
 
-    <section class="screen intro">
-      <div class="type-card">
-        <p class="typing" id="typingText"></p>
+    <section class="screen loading">
+      <div class="elephant small-elephant">🐘</div>
+      <h2>Loading memories...</h2>
+      <div class="loader"><span></span></div>
+      <div class="found-list">
+        <p>💜 178 smiles</p>
+        <p>💜 42 adventures</p>
+        <p>💜 5 months together</p>
+        <p>💜 1 beautiful wife</p>
       </div>
-      <button class="primary" onclick="next()">Tap to continue</button>
+      <button class="primary show-late" onclick="next()">Begin</button>
+    </section>
+
+    <section class="screen note">
+      <div class="letter-paper">
+        <p class="hand">Hey Sundri...</p>
+        <p>Happy Birthday ❤️</p>
+        <p>I wanted to buy you something.</p>
+        <p>Then I realized...</p>
+        <p>The best gift is remembering everything that made us... us.</p>
+      </div>
+      <button class="primary" onclick="next()">Continue</button>
       <button class="soft-btn" onclick="fakeSkip()">I’m impatient 😏</button>
     </section>
 
-    <section class="screen diary">
-      <p class="label">Before I met you</p>
+    <section class="screen memory">
+      <p class="tag">Before I met you</p>
       <h2>Life was just life. Then one day, you happened.</h2>
-      <div class="swipe-book" data-carousel>
-        <article class="memory-page active">
+      <div class="carousel" data-carousel>
+        <article class="photo-card active">
           <img src="assets/images/before-car.jpg" />
           <p>Back when we were still slowly becoming us.</p>
         </article>
-        <article class="memory-page">
+        <article class="photo-card">
           <img src="assets/images/before-temple-selfie.jpg" />
           <p>Our first blessings together.</p>
         </article>
-        <article class="memory-page">
+        <article class="photo-card">
           <img src="assets/images/before-temple-portrait.jpg" />
           <p>You already looked like home.</p>
         </article>
-        <div class="swipe-tip">Swipe / tap photo</div>
+        <div class="swipe">Swipe / tap photo →</div>
       </div>
       <button class="primary" onclick="next()">Next page</button>
     </section>
 
     <section class="screen wedding">
-      <p class="label">February 5</p>
+      <p class="tag">February 5</p>
       <h2>The day I stopped saying “I” and started saying “We”.</h2>
-      <figure class="cinema-photo">
+      <figure class="single-photo">
         <img src="assets/images/wedding-mangalsutra.jpg" />
         <figcaption>The day I got to call you my wife.</figcaption>
       </figure>
@@ -65,69 +78,70 @@
     </section>
 
     <section class="screen wedding">
-      <p class="label">The best decision</p>
+      <p class="tag">The best decision</p>
       <h2>My favorite person became my family.</h2>
-      <figure class="cinema-photo">
+      <figure class="single-photo">
         <img src="assets/images/wedding-akshata.jpg" />
         <figcaption>I still remember this smile like yesterday.</figcaption>
       </figure>
       <button class="primary" onclick="next()">Five months later</button>
     </section>
 
-    <section class="screen diary">
-      <p class="label">Five months later</p>
+    <section class="screen memory">
+      <p class="tag">Five months later</p>
       <h2>Small fights, big laughs, and a life slowly becoming ours.</h2>
-      <div class="swipe-book" data-carousel>
-        <article class="memory-page active">
+      <div class="carousel" data-carousel>
+        <article class="photo-card active">
           <img src="assets/images/mountain.jpg" />
           <p>Partners in every climb, every laugh, every adventure.</p>
         </article>
-        <article class="memory-page">
+        <article class="photo-card">
           <img src="assets/images/boxing.jpg" />
           <p>Beautiful... but also dangerous. 😂</p>
         </article>
-        <article class="memory-page">
+        <article class="photo-card">
           <img src="assets/images/holi.jpg" />
           <p>Life has been far more colorful since you came into it.</p>
         </article>
-        <article class="memory-page">
+        <article class="photo-card">
           <img src="assets/images/leo.jpg" />
           <p>Winning your heart was special. Winning Leo’s approval was the real achievement. 🐾</p>
         </article>
-        <div class="swipe-tip">Swipe / tap photo</div>
+        <div class="swipe">Swipe / tap photo →</div>
       </div>
       <button class="primary" onclick="next()">Our adventures</button>
     </section>
 
-    <section class="screen diary ocean">
-      <p class="label">Our little adventures</p>
+    <section class="screen memory">
+      <p class="tag">Our little adventures</p>
       <h2>Every place became special because you were there.</h2>
-      <div class="swipe-book" data-carousel>
-        <article class="memory-page active">
+      <div class="carousel" data-carousel>
+        <article class="photo-card active">
           <img src="assets/images/boracay.jpg" />
           <p>The sunset was beautiful. But I kept looking at you.</p>
         </article>
-        <article class="memory-page">
+        <article class="photo-card">
           <img src="assets/images/date.jpg" />
           <p>Every date with you becomes my favorite memory.</p>
         </article>
-        <article class="memory-page">
+        <article class="photo-card">
           <img src="assets/images/flight-sleep.jpg" />
           <p>Even on a crowded flight, my favorite place was wherever you were.</p>
         </article>
-        <article class="memory-page">
+        <article class="photo-card">
           <img src="assets/images/selfie.jpg" />
           <p>One selfie... thousands more to come.</p>
         </article>
-        <div class="swipe-tip">Swipe / tap photo</div>
+        <div class="swipe">Swipe / tap photo →</div>
       </div>
       <button class="primary" onclick="next()">Birthday time</button>
     </section>
 
     <section class="screen cake-screen">
-      <p class="label">Make a wish</p>
-      <h2>Happy Birthday, Sundri ❤️</h2>
-      <p class="sub">Tap the candle to blow it out.</p>
+      <div class="elephant">🐘🎈</div>
+      <p class="tag">Make a wish</p>
+      <h2>Happy Birthday, Sundri 💜</h2>
+      <p>Tap the candle to blow it out.</p>
       <div class="cake" id="cake" onclick="blowCandle()">
         <div class="flame"></div>
         <div class="candle"></div>
@@ -139,9 +153,9 @@
     </section>
 
     <section class="screen final">
-      <p class="label">From your husband</p>
-      <div class="letter">
-        <h2>Happy Birthday, Sundri ❤️</h2>
+      <p class="tag">From your husband</p>
+      <div class="final-letter">
+        <h2>Happy Birthday, Sundri 💜</h2>
         <p>Five months ago, on February 5, you became my wife.</p>
         <p>Since then, you have turned ordinary days into beautiful memories.</p>
         <p>Thank you for laughing with me, travelling with me, praying with me, being silly with me, and simply being by my side.</p>
@@ -152,6 +166,7 @@
     </section>
 
     <section class="screen secret">
+      <div class="elephant big-elephant">🐘💜</div>
       <h2>Wait...</h2>
       <p>Don’t close this yet.</p>
       <div class="secret-note">
@@ -165,12 +180,11 @@
   <div class="modal" id="skipModal">
     <div class="modal-card">
       <h2>Nice try, Sundri 😄</h2>
-      <p>You already waited for me. Now wait just a little longer. ❤️</p>
+      <p>You already waited for me. Now wait just a little longer. 💜</p>
       <button class="primary" onclick="closeSkip()">Continue</button>
     </div>
   </div>
 
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
