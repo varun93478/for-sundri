@@ -1,3 +1,3 @@
-# For Sundri Version X
+# For Sundri Interactive
 
-GSAP cinematic tap-through story. Replace GitHub root files.
+Interaction-first birthday experience.

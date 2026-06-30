@@ -8,212 +8,110 @@
 </head>
 <body>
   <canvas id="fx"></canvas>
-  <div id="worldBg"></div>
-  <div class="grain"></div>
+  <div class="bg" id="bg"></div>
 
-  <button id="soundBtn" class="sound">Sound ✦</button>
-  <div class="progress"><span id="progress"></span></div>
-
-  <main id="story">
-    <section class="scene active night" data-bg="night">
-      <div class="elephant-guide">🐘</div>
-      <div class="copy">
-        <p class="tiny">tap tap tap...</p>
-        <h1>Come with me.</h1>
-        <p>I want to show you someone very special.</p>
-      </div>
-      <p class="tap">Tap anywhere</p>
+  <main class="app">
+    <section class="screen active" id="s0">
+      <div class="elephant" onclick="sparkCenter()">🐘</div>
+      <p class="mini">A tiny elephant has a message...</p>
+      <h1>Hey Sundri 💜</h1>
+      <p>Tap the elephant to begin.</p>
+      <button onclick="go(1)">Begin</button>
     </section>
 
-    <section class="scene night" data-bg="night">
-      <div class="copy center">
-        <p class="tiny">For Sundri</p>
-        <h1>Happy Birthday 💜</h1>
-        <p>This is not a website. This is a small walk through our story.</p>
+    <section class="screen" id="s1">
+      <p class="mini">Unlock the story</p>
+      <h2>Tap all 5 stars</h2>
+      <p>Every star holds one piece of our first 5 months.</p>
+      <div class="star-map" id="starMap">
+        <button class="star" style="left:50%;top:8%" data-msg="Before us, life was just life.">⭐</button>
+        <button class="star" style="left:78%;top:32%" data-msg="Then one day, you happened.">⭐</button>
+        <button class="star" style="left:68%;top:72%" data-msg="February 5 changed everything.">⭐</button>
+        <button class="star" style="left:31%;top:72%" data-msg="Five months became full of memories.">⭐</button>
+        <button class="star" style="left:22%;top:32%" data-msg="And this is only Chapter One.">⭐</button>
+        <svg id="lines"></svg>
       </div>
-      <p class="tap">Tap to walk in</p>
+      <div class="message-box" id="starMsg">Tap a star ✨</div>
+      <button id="starNext" class="locked" onclick="go(2)">Unlock memories</button>
     </section>
 
-    <section class="scene warm" data-bg="warm">
-      <div class="photo-world">
-        <img src="assets/images/before-car.jpg" />
+    <section class="screen memory" id="s2">
+      <p class="mini">Memory 01</p>
+      <h2>Swipe the photo</h2>
+      <div class="deck" id="deck1">
+        <article class="card active"><img src="assets/images/before-car.jpg"><p>Back when we were still slowly becoming us.</p></article>
+        <article class="card"><img src="assets/images/before-temple-selfie.jpg"><p>Every blessing felt like a step closer to forever.</p></article>
+        <article class="card"><img src="assets/images/before-temple-portrait.jpg"><p>You already looked like home.</p></article>
       </div>
-      <div class="copy bottom">
-        <p class="tiny">Before “Us”</p>
-        <h2>We were strangers...</h2>
-        <p>slowly becoming home.</p>
-      </div>
+      <p class="hint">Tap / swipe photo to change</p>
+      <button onclick="go(3)">Next memory</button>
     </section>
 
-    <section class="scene warm" data-bg="warm">
-      <div class="photo-world tilt-right">
-        <img src="assets/images/before-temple-selfie.jpg" />
+    <section class="screen memory" id="s3">
+      <p class="mini">Wedding memory</p>
+      <h2>Hold the photo</h2>
+      <div class="hold-card" id="holdPhoto">
+        <img src="assets/images/wedding-mangalsutra.jpg">
+        <div class="cover">Hold to reveal 💍</div>
       </div>
-      <div class="copy bottom">
-        <p class="tiny">First blessings</p>
-        <h2>Every blessing felt like a step closer to forever.</h2>
-      </div>
+      <p id="holdText">The day I stopped saying “I” and started saying “We”.</p>
+      <button onclick="go(4)">Continue</button>
     </section>
 
-    <section class="scene warm" data-bg="warm">
-      <div class="photo-world">
-        <img src="assets/images/before-temple-portrait.jpg" />
+    <section class="screen memory" id="s4">
+      <p class="mini">Our moments</p>
+      <h2>Pick a memory</h2>
+      <div class="choice-grid">
+        <button onclick="openMemory('mountain.jpg','Partners in every climb, every laugh, every adventure.')">🏔️ Adventure</button>
+        <button onclick="openMemory('boxing.jpg','Beautiful... but also dangerous. 😂')">🥊 Fighter</button>
+        <button onclick="openMemory('leo.jpg','Winning Leo’s approval was the real achievement. 🐾')">🐾 Leo</button>
+        <button onclick="openMemory('holi.jpg','Life has been far more colorful since you came into it.')">🌈 Holi</button>
       </div>
-      <div class="copy bottom">
-        <p class="tiny">The beginning</p>
-        <h2>You already looked like home.</h2>
-      </div>
+      <button onclick="go(5)">Birthday time</button>
     </section>
 
-    <section class="scene wedding" data-bg="gold">
-      <div class="petal-field"></div>
-      <div class="photo-world hero">
-        <img src="assets/images/wedding-mangalsutra.jpg" />
-      </div>
-      <div class="copy bottom">
-        <p class="tiny">February 5</p>
-        <h2>The day I stopped saying “I”...</h2>
-        <p>and started saying “We”.</p>
-      </div>
-    </section>
-
-    <section class="scene wedding" data-bg="gold">
-      <div class="photo-world hero tilt-left">
-        <img src="assets/images/wedding-akshata.jpg" />
-      </div>
-      <div class="copy bottom">
-        <p class="tiny">My favorite memory</p>
-        <h2>My favorite person became my family.</h2>
+    <section class="screen cake-screen" id="s5">
+      <p class="mini">Make a wish</p>
+      <h2>Happy Birthday, Sundri 💜</h2>
+      <p>Tap the candle to blow it out.</p>
+      <div class="cake" id="cake" onclick="blowCandle()">
+        <div class="flame"></div><div class="candle"></div><div class="cake-top"></div><div class="cake-base">Sundri</div><div class="plate"></div>
       </div>
     </section>
 
-    <section class="scene warm" data-bg="lavender">
-      <div class="photo-world">
-        <img src="assets/images/mountain.jpg" />
+    <section class="screen" id="s6">
+      <p class="mini">One final note</p>
+      <h2>Open the envelope</h2>
+      <div class="envelope" onclick="openLetter()">
+        <div class="flap"></div>
+        <div class="paper-letter" id="paperLetter">
+          <h3>Happy Birthday, Sundri 💜</h3>
+          <p>Five months ago, on February 5, you became my wife.</p>
+          <p>Since then, every ordinary day feels special.</p>
+          <p>I can’t promise life will always be easy. But I promise you will never walk through it alone.</p>
+          <b>Forever your annoying husband,<br>Varun ❤️</b>
+        </div>
       </div>
-      <div class="copy bottom">
-        <p class="tiny">Five months later</p>
-        <h2>Partners in every climb, every laugh, every adventure.</h2>
-      </div>
+      <button onclick="go(7)">One more thing</button>
     </section>
 
-    <section class="scene punch" data-bg="lavender">
-      <div class="impact">💥</div>
-      <div class="photo-world tilt-right">
-        <img src="assets/images/boxing.jpg" />
-      </div>
-      <div class="copy bottom">
-        <p class="tiny">Warning</p>
-        <h2>Beautiful...</h2>
-        <p>but also dangerous. 😂</p>
-      </div>
-    </section>
-
-    <section class="scene holi" data-bg="holi">
-      <div class="color-burst">💜 🌸 💛</div>
-      <div class="photo-world">
-        <img src="assets/images/holi.jpg" />
-      </div>
-      <div class="copy bottom">
-        <p class="tiny">The real us</p>
-        <h2>Life has been far more colorful since you came into it.</h2>
-      </div>
-    </section>
-
-    <section class="scene warm" data-bg="warm">
-      <div class="paw-path">🐾 🐾 🐾</div>
-      <div class="photo-world tilt-left">
-        <img src="assets/images/leo.jpg" />
-      </div>
-      <div class="copy bottom">
-        <p class="tiny">Leo approved</p>
-        <h2>Winning your heart was special.</h2>
-        <p>Winning Leo’s approval was the real achievement.</p>
-      </div>
-    </section>
-
-    <section class="scene ocean" data-bg="ocean">
-      <div class="waves"></div>
-      <div class="photo-world hero">
-        <img src="assets/images/boracay.jpg" />
-      </div>
-      <div class="copy bottom">
-        <p class="tiny">Our little adventures</p>
-        <h2>The sunset was beautiful.</h2>
-        <p>But I kept looking at you.</p>
-      </div>
-    </section>
-
-    <section class="scene warm" data-bg="warm">
-      <div class="photo-world">
-        <img src="assets/images/date.jpg" />
-      </div>
-      <div class="copy bottom">
-        <p class="tiny">Date memories</p>
-        <h2>Every date with you becomes my favorite memory.</h2>
-      </div>
-    </section>
-
-    <section class="scene warm" data-bg="lavender">
-      <div class="photo-world tilt-right">
-        <img src="assets/images/flight-sleep.jpg" />
-      </div>
-      <div class="copy bottom">
-        <p class="tiny">Wherever you are</p>
-        <h2>Even on a crowded flight...</h2>
-        <p>my favorite place was wherever you were.</p>
-      </div>
-    </section>
-
-    <section class="scene cake-scene" data-bg="lavender">
-      <div class="copy center">
-        <p class="tiny">Make a wish</p>
-        <h1>Happy Birthday, Sundri 💜</h1>
-        <p>Tap the candle.</p>
-      </div>
-      <div class="cake" id="cake">
-        <div class="flame"></div>
-        <div class="candle"></div>
-        <div class="cake-top"></div>
-        <div class="cake-base">Sundri</div>
-        <div class="plate"></div>
-      </div>
-    </section>
-
-    <section class="scene final night" data-bg="night">
-      <div class="heart-constellation">💜</div>
-      <div class="letter">
-        <h2>Happy Birthday, Sundri</h2>
-        <p>Five months ago, on February 5, you became my wife.</p>
-        <p>Since then, you have turned ordinary days into beautiful memories.</p>
-        <p>Thank you for laughing with me, travelling with me, praying with me, being silly with me, and simply being by my side.</p>
-        <p>I can’t promise life will always be easy. But I promise you will never walk through it alone.</p>
-        <h3>I love you. Forever your annoying husband, Varun ❤️</h3>
-      </div>
-    </section>
-
-    <section class="scene secret night" data-bg="night">
-      <div class="elephant-guide big">🐘💜</div>
-      <div class="copy center">
-        <h1>Wait...</h1>
-        <p>Your birthday is not over.</p>
-        <p>Now go find your real surprise. 🎁</p>
-      </div>
-      <button class="replay" onclick="restartStory(event)">Replay</button>
+    <section class="screen" id="s7">
+      <div class="elephant big">🐘💜</div>
+      <h1>Chapter One.</h1>
+      <p>This isn’t our story’s ending...</p>
+      <p>It’s only Chapter One. ❤️</p>
+      <button onclick="restart()">Replay</button>
     </section>
   </main>
 
-  <button class="skip" onclick="openSkip(event)">I’m impatient 😏</button>
-
-  <div class="modal" id="modal">
-    <div>
-      <h2>Nice try, Sundri 😄</h2>
-      <p>You already waited for me. Now wait just a little longer. 💜</p>
-      <button onclick="closeSkip(event)">Continue</button>
+  <div class="modal" id="memoryModal">
+    <div class="modal-card">
+      <img id="modalImg">
+      <p id="modalText"></p>
+      <button onclick="closeMemory()">Close</button>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
